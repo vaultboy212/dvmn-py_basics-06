@@ -1,22 +1,33 @@
+
+
+MIN_PASSWORD_LENGTH = 12
+SCORE_PER_CHECK = 2
+
+
+def is_very_long(password):
+    return len(password) >= MIN_PASSWORD_LENGTH
+
+
+def has_digit(password):
+    return any(letter.isdigit() for letter in password)
+
+
+def has_lower_letters(password):
+    return any(letter.islower() for letter in password)
+
+
+def has_upper_letters(password):
+    return any(letter.isupper() for letter in password)
+
+
+def has_symbols(password):
+    return any(not letter.isdigit() and not letter.isalpha()
+               for letter in password)
+
+
 def main():
     score = 0
     password = input('Введите пароль:')
-
-    def is_very_long(password):
-        return len(password) >= 12
-
-    def has_digit(password):
-        return any(letter.isdigit() for letter in password)
-
-    def has_lower_letters(password):
-        return any(letter.islower() for letter in password)
-
-    def has_upper_letters(password):
-        return any(letter.isupper() for letter in password)
-
-    def has_symbols(password):
-        return any(not letter.isdigit() and not letter.isalpha()
-                   for letter in password)
 
     checks = [
         is_very_long,
@@ -28,7 +39,7 @@ def main():
 
     for check in checks:
         if check(password):
-            score += 2
+            score += SCORE_PER_CHECK
 
     print('Рейтинг пароля', score)
 
